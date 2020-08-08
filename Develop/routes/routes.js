@@ -25,7 +25,8 @@ module.exports = app => {
             let newNote = req.body;
             notes.push(newNote);
             updateDb();
-            return console.log("Added new note: " + newNote.title);
+            console.log("Added new note: " + newNote.title);
+            res.json({});
         });
 
         app.get("/api/notes/:id", function (req, res) {
@@ -38,23 +39,24 @@ module.exports = app => {
             notes.splice(req.params.id, 1);
             updateDb();
             console.log("Deleted note with id " + req.params.id,);
+            res.json({});
         });
 
         // View Routes
 
         // * GET `/notes` - Should return the `notes.html` file.
-        app.get("/", function (req, res) {
-            res.sendFile(path.join(__dirname, "/public/notes.html"));
+        app.get("/notes", function (req, res) {
+            res.sendFile(path.join(__dirname, "../public/notes.html"));
         });
 
         //   * GET `*` - Should return the `index.html` file
         app.get("*", function (req, res) {
-            res.sendFile(path.join(__dirname, "/public/index.html"));
+            res.sendFile(path.join(__dirname, "../public/index.html"));
         });
 
         //updates the json file whenever a note is added or deleted
         function updateDb() {
-            fs.writeFile("./db/db.json", JSON.stringify(notes, '\t'), err => {
+            fs.writeFile("./db/db.json", JSON.stringify(notes, '\n'), err => {
                 if (err) throw err;
                 return true;
             });
