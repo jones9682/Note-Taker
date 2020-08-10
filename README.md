@@ -33,7 +33,7 @@ For users that need to keep track of a lot of information, it's easy to forget o
 
 ## Heroku App Demo Link
 
-![Heroku App Demo Link]()
+![Heroku Deployed App](https://thawing-tundra-72334.herokuapp.com/)
 
 ## License
 
